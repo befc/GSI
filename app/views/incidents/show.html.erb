@@ -1,0 +1,51 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="active"><%= link_to "#{t("web-app-theme.show", :default => "Show")}", incident_path %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <div class="inner">
+      
+        <p>
+          <b><%= t("activerecord.attributes.incident.tipo", :default => t("activerecord.labels.tipo", :default => "Tipo")) %>:</b>
+		  
+		  <%= @incident.tipo %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.incident.estado", :default => t("activerecord.labels.estado", :default => "Estado")) %>:</b>
+          <%= @incident.estado %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.incident.descricao", :default => t("activerecord.labels.descricao", :default => "descricao")) %>:</b>
+          <%= @incident.descricao %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.incident.prioridade", :default => t("activerecord.labels.prioridade", :default => "Prioridade")) %>:</b>
+          <%= @incident.prioridade %>
+        </p>
+
+        <p>
+          <b><%= t("activerecord.attributes.incident.solucao", :default => t("activerecord.labels.solucao", :default => "Solucao")) %>:</b>
+          <%= @incident.solucao %>
+        </p>
+      <div class="wat-cf">
+		<% if not @incident.estado.eql? ('Fechado') -%>
+        	<%= link_to image_tag("web-app-theme/icons/application_edit.png", :alt => "#{t("web-app-theme.edit", :default=> "Edit")}") + " " + t("web-app-theme.edit", :default=> "Edit"), edit_incident_path(@incident), :class => "button" %>
+		<% end -%>
+		  <% if @incident.estado.eql? ('Help-desk') -%>
+	        <%= link_to t("web-app-theme.cancel", :default => "Cancel"), incidents_path, :class => "text_button_padding link_button" %>
+		  <% elsif @incident.estado.eql? ('Administracao') -%>
+	        <%= link_to t("web-app-theme.cancel", :default => "Cancel"), incidents_path + '/admin', :class => "text_button_padding link_button" %>
+		  <% elsif @incident.estado.eql? ('Tecnicos') -%>
+	        <%= link_to t("web-app-theme.cancel", :default => "Cancel"), incidents_path + '/tec', :class => "text_button_padding link_button" %>
+		  <% elsif @incident.estado.eql? ('Fechado') -%>
+		    <%= link_to t("web-app-theme.cancel", :default => "Cancel"), incidents_path + '/close', :class => "text_button_padding link_button" %>
+		  <% end -%>
+      </div>      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      	<li><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_incident_path %></li>
+	    <li><%= link_to "#{t("web-app-theme.list", :default => "Help Desk")}", incidents_path  %></li>
+	    <li><%= link_to "#{t("web-app-theme.admin", :default => "Administração")}", incidents_path + '/admin' %></li>
+		<li class="active"><%= link_to "#{t("web-app-theme.tec", :default => "Tecnicos")}", incidents_path + '/tec' %></li>
+		<li><%= link_to "#{t("web-app-theme.close", :default => "Resolvidos")}", incidents_path + '/close' %></li>
+    </ul>
+  </div>          
+  <div class="content">          
+    <h2 class="title"><%= t("web-app-theme.all", :default => "All")  %> Incidents</h2>
+    <div class="inner">
+      <table class="table">
+        <tr>             
+          <th class="first">ID</th>
+                    <th>
+            <%= t("activerecord.attributes.incident.tipo", :default => t("activerecord.labels.tipo", :default => "Tipo")) %>
+          </th>
+                    <th><%= t("web-app-theme.created_at", :default => "Created at")  %></th>
+          <th class="last">&nbsp;</th>
+        </tr>
+        <% @incidents.each do |incident| -%>
+        <tr class="<%= cycle("odd", "even") %>">
+		  <% if incident.estado.eql? ('Tecnicos') -%>
+          <td>
+            <%= incident.id %>
+          </td>
+                    <td>
+            <%= link_to incident.tipo, incident_path(incident) %>
+          </td>
+                    <td>
+            <%= incident.created_at %>
+          </td>
+		
+          <td class="last">
+            <%= link_to "#{t("web-app-theme.show", :default => "Show")}", incident_path(incident) %> |
+            <%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_incident_path(incident) %>
+          </td>
+		  <% end -%>
+        </tr>          
+        <% end -%>
+      </table>
+      <div class="actions-bar wat-cf">
+        <div class="actions">
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</div>

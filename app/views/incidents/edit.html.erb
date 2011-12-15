@@ -1,0 +1,25 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      <li class="active"><%= link_to "#{t("web-app-theme.edit", :default => "Edit")}", edit_incident_path %></li>
+    </ul>
+  </div>          
+  <div class="content">            
+    <h2 class="title"><%= t("web-app-theme.edit", :default => "Edit") %> Incident</h2>
+    <div class="inner">
+	  <% if @incident.estado.eql? ('Help-desk') -%>
+        <%= form_for @incident, :url => incident_path(@incident), :html => { :class => :form } do |f| -%>
+          <%= render :partial => "helpdeskform", :locals => {:f => f} %>
+        <% end -%>
+	  <% elsif @incident.estado.eql? ('Administracao') -%>
+        <%= form_for @incident, :url => incident_path(@incident), :html => { :class => :form } do |f| -%>
+          <%= render :partial => "adminform", :locals => {:f => f} %>
+        <% end -%>
+	  <% elsif @incident.estado.eql? ('Tecnicos') -%>
+        <%= form_for @incident, :url => incident_path(@incident), :html => { :class => :form } do |f| -%>
+          <%= render :partial => "tecform", :locals => {:f => f} %>
+        <% end -%>
+	  <% end -%>
+    </div>
+  </div>
+</div>

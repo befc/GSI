@@ -1,0 +1,19 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul class="wat-cf">
+      	<li class="first active"><%= link_to "#{t("web-app-theme.new", :default => "New")}", new_incident_path %></li>
+	    <li><%= link_to "#{t("web-app-theme.list", :default => "Help Desk")}", incidents_path  %></li>
+	    <li><%= link_to "#{t("web-app-theme.admin", :default => "Administração")}", incidents_path + '/admin' %></li>
+		<li><%= link_to "#{t("web-app-theme.tec", :default => "Tecnicos")}", incidents_path + '/tec' %></li>
+		<li><%= link_to "#{t("web-app-theme.close", :default => "Resolvidos")}", incidents_path + '/close' %></li>
+    </ul>
+  </div>          
+  <div class="content">
+    <h2 class="title"><%= t("web-app-theme.new", :default => "New")%>  Incident</h2>
+    <div class="inner">
+      <%= form_for :incident, :url => incidents_path, :html => { :class => :form } do |f| -%>
+        <%= render :partial => "newform", :locals => {:f => f} %>
+      <% end -%>
+    </div>
+  </div>
+</div>
